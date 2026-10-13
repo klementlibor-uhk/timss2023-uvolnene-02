@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="771" height="273" viewBox="0 0 771 273" role="img" aria-labelledby="title description">
+  <title id="title">Sněhové srážky v letech 1892–1893 a 2016–2017</title>
+  <desc id="description">Dva původní sloupcové diagramy mají různá měřítka: vlevo od 0 do 30 centimetrů, vpravo od 0 do 50 centimetrů. Obě stupnice mají dílky po 5 centimetrech. V únoru 1893 napadlo 24 centimetrů a v únoru 2017 30 centimetrů. Sloupce ostatních měsíců zachovávají relativní výšky původního diagramu.</desc>
+  <rect width="771" height="273" fill="#fff"/>
+  <style>
+    text { font-family: Arial, Helvetica, sans-serif; fill: #111; }
+    .heading { font-size: 18px; font-weight: 700; text-anchor: middle; }
+    .axis-title { font-size: 18px; font-weight: 700; text-anchor: middle; }
+    .number { font-size: 14px; text-anchor: end; }
+    .month { font-size: 14px; font-weight: 600; text-anchor: end; }
+    .grid { stroke: #d0d0d0; stroke-width: 1; fill: none; }
+    .frame { stroke: #707070; stroke-width: 1.35; fill: none; }
+    .tick { stroke: #707070; stroke-width: 1; }
+    .bar { fill: #5b8cc2; }
+  </style>
+
+  <!-- Coordinates follow the source bitmap; the two equal-height plot areas
+       deliberately retain their different vertical scales. -->
+  <g id="snow-1893">
+    <text class="heading" x="201" y="22">Sněhové srážky 1892-1893</text>
+    <path class="grid" d="M68 28.5H334 M68 55.333H334 M68 82.167H334 M68 109H334 M68 135.833H334 M68 162.667H334 M68 189.5H334"/>
+    <g class="bar">
+      <rect x="206.5" y="149.5" width="10.5" height="40"/>
+      <rect x="230.5" y="60.7" width="10.5" height="128.8"/>
+      <rect x="254.5" y="180.5" width="10.5" height="9"/>
+      <rect x="278.5" y="141.5" width="10.5" height="48"/>
+    </g>
+    <rect class="frame" x="68" y="28.5" width="266" height="161"/>
+    <path class="tick" d="M64 28.5H68 M64 55.333H68 M64 82.167H68 M64 109H68 M64 135.833H68 M64 162.667H68 M64 189.5H68"/>
+    <g class="number">
+      <text x="60" y="33.5">30</text>
+      <text x="60" y="60.333">25</text>
+      <text x="60" y="87.167">20</text>
+      <text x="60" y="114">15</text>
+      <text x="60" y="140.833">10</text>
+      <text x="60" y="167.667">5</text>
+      <text x="60" y="194.5">0</text>
+    </g>
+    <text class="axis-title" transform="translate(28 110) rotate(-90)">Sníh (cm)</text>
+    <g class="month">
+      <text transform="translate(68 201) rotate(-45)">Červenec</text>
+      <text transform="translate(92 201) rotate(-45)">Srpen</text>
+      <text transform="translate(116 201) rotate(-45)">Září</text>
+      <text transform="translate(140 201) rotate(-45)">Říjen</text>
+      <text transform="translate(164 201) rotate(-45)">Listopad</text>
+      <text transform="translate(188 201) rotate(-45)">Prosinec</text>
+      <text transform="translate(212 201) rotate(-45)">Leden</text>
+      <text transform="translate(236 201) rotate(-45)">Únor</text>
+      <text transform="translate(260 201) rotate(-45)">Březen</text>
+      <text transform="translate(284 201) rotate(-45)">Duben</text>
+      <text transform="translate(308 201) rotate(-45)">Květen</text>
+      <text transform="translate(332 201) rotate(-45)">Červen</text>
+    </g>
+    <text class="axis-title" x="201" y="265">Měsíc</text>
+  </g>
+
+  <g id="snow-2017">
+    <text class="heading" x="624.5" y="22">Sněhové srážky 2016-2017</text>
+    <path class="grid" d="M491 28.5H758 M491 44.6H758 M491 60.7H758 M491 76.8H758 M491 92.9H758 M491 109H758 M491 125.1H758 M491 141.2H758 M491 157.3H758 M491 173.4H758 M491 189.5H758"/>
+    <g class="bar">
+      <rect x="582.5" y="174.5" width="10.5" height="15"/>
+      <rect x="606.5" y="135.5" width="10.5" height="54"/>
+      <rect x="630.5" y="163.5" width="10.5" height="26"/>
+      <rect x="654.5" y="92.9" width="10.5" height="96.6"/>
+      <rect x="678.5" y="70" width="10.5" height="119.5"/>
+      <rect x="702.5" y="48" width="10.5" height="141.5"/>
+    </g>
+    <rect class="frame" x="491" y="28.5" width="267" height="161"/>
+    <path class="tick" d="M487 28.5H491 M487 44.6H491 M487 60.7H491 M487 76.8H491 M487 92.9H491 M487 109H491 M487 125.1H491 M487 141.2H491 M487 157.3H491 M487 173.4H491 M487 189.5H491"/>
+    <g class="number">
+      <text x="483" y="33.5">50</text>
+      <text x="483" y="49.6">45</text>
+      <text x="483" y="65.7">40</text>
+      <text x="483" y="81.8">35</text>
+      <text x="483" y="97.9">30</text>
+      <text x="483" y="114">25</text>
+      <text x="483" y="130.1">20</text>
+      <text x="483" y="146.2">15</text>
+      <text x="483" y="162.3">10</text>
+      <text x="483" y="178.4">5</text>
+      <text x="483" y="194.5">0</text>
+    </g>
+    <text class="axis-title" transform="translate(451 110) rotate(-90)">Sníh (cm)</text>
+    <g class="month">
+      <text transform="translate(492 201) rotate(-45)">Červenec</text>
+      <text transform="translate(516 201) rotate(-45)">Srpen</text>
+      <text transform="translate(540 201) rotate(-45)">Září</text>
+      <text transform="translate(564 201) rotate(-45)">Říjen</text>
+      <text transform="translate(588 201) rotate(-45)">Listopad</text>
+      <text transform="translate(612 201) rotate(-45)">Prosinec</text>
+      <text transform="translate(636 201) rotate(-45)">Leden</text>
+      <text transform="translate(660 201) rotate(-45)">Únor</text>
+      <text transform="translate(684 201) rotate(-45)">Březen</text>
+      <text transform="translate(708 201) rotate(-45)">Duben</text>
+      <text transform="translate(732 201) rotate(-45)">Květen</text>
+      <text transform="translate(756 201) rotate(-45)">Červen</text>
+    </g>
+    <text class="axis-title" x="624.5" y="265">Měsíc</text>
+  </g>
+</svg>
