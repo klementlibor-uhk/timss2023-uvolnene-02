@@ -15,7 +15,7 @@ function hasAnyAnswer(i){return required[i].some(k=>Array.isArray(answers[k])?an
 const statusLabel=s=>s==='correct'?'Správně':s==='partial'?'Částečně správně':'Nesprávně';
 function renderSteps() {
   const rail=$('#steps');
-  rail.innerHTML=TIMSS.ids.map((id,i)=>`<li class="${answered(i)?'done':''} ${finished?'review-step-'+status(i):''}"><button data-step="${i}" ${!finished&&i>unlocked?'disabled':''} ${page===i?'aria-current="step"':''} aria-label="Otázka ${i+1}${finished?', '+statusLabel(status(i)):answered(i)?', odpovězeno':''}"><span class="circle">${i+1}</span><span class="step-name">Otázka ${i+1}</span></button></li>`).join('');
+  rail.innerHTML=TIMSS.ids.map((id,i)=>`<li class="${answered(i)?'done':''} ${finished?'review-step-'+status(i):''}"><button data-step="${i}" ${!finished&&i>unlocked?'disabled':''} ${page===i?'aria-current="step"':''} aria-label="Úloha ${i+1}${finished?', '+statusLabel(status(i)):answered(i)?', odpovězeno':''}"><span class="circle">${i+1}</span><span class="step-name">Úloha ${i+1}</span></button></li>`).join('');
   rail.querySelectorAll('button').forEach(b=>b.onclick=()=>go(Number(b.dataset.step)));
   $('#progress').textContent=`Vyplněno ${TIMSS.ids.filter((_,i)=>answered(i)).length} z 12 úloh.`;
 }
@@ -26,7 +26,7 @@ function go(i) {
 function bindInteractions() {
   if(finished)return;
   if(page===2)CardTiles.bind($('[data-card-board]'),{
-    values:[3,5,7,8],rows:cardRows,get:()=>[answers.q3top||'',answers.q3bottom||''],
+    values:[3,5,7,8],rows:cardRows,showHelp:false,get:()=>[answers.q3top||'',answers.q3bottom||''],
     onchange:slots=>{[answers.q3top,answers.q3bottom]=slots;renderSteps();}
   });
   if(page===7)GridDrawing.bind($('[data-drawing-board]'),{get:()=>answers.q8||[],onchange:edges=>{answers.q8=edges;renderSteps();}});
@@ -36,7 +36,7 @@ function render(focus=true) {
   document.body.classList.remove('results-view');
   renderSteps();
   const s=finished?status(page):null;
-  $('#question').innerHTML=`<div class="question-header"><span class="eyebrow">${finished?'Prohlížení odpovědí':'Otázka '+(page+1)+' z 12'}</span><span class="qid">${TIMSS.ids[page]}</span></div><h1 class="task-heading">${titles[page]}</h1>${finished?`<p class="review-summary status ${s}">${s==='correct'?'✓':s==='partial'?'◐':'×'} ${hasAnyAnswer(page)?statusLabel(s):'Bez odpovědi'} · ${TIMSS.score(answers)[page]}/1 bod</p>`:''}${screens[page]()}${finished?`<div class="review-answer"><b>Správná odpověď</b><p>${solutions[page]}</p></div>${lessonButton(page)}`:''}`;
+  $('#question').innerHTML=`<div class="question-header"><h1 class="task-heading">Úloha ${page+1}</h1><span class="qid">${TIMSS.ids[page]}</span></div><p class="task-position subtle">${page+1} z 12${finished?' · Prohlížení odpovědí':''}</p>${finished?`<p class="review-summary status ${s}">${s==='correct'?'✓':s==='partial'?'◐':'×'} ${hasAnyAnswer(page)?statusLabel(s):'Bez odpovědi'} · ${TIMSS.score(answers)[page]}/1 bod</p>`:''}${screens[page]()}${finished?`<div class="review-answer"><b>Správná odpověď</b><p>${solutions[page]}</p></div>${lessonButton(page)}`:''}`;
   $('#prev').disabled=page===0;$('#next').hidden=false;$('#next').disabled=page===11;
   $('#finish').textContent=finished?'Zpět na výsledek':'Odevzdat test';
   $('#pad-toggle').disabled=finished||![1,5,11].includes(page);
@@ -96,17 +96,15 @@ $('#submit').onclick=()=>{
 function result() {
   closePad();renderSteps();document.body.classList.add('results-view');
   const scores=TIMSS.score(answers),sum=scores.reduce((a,b)=>a+b,0),percent=(sum/12*100).toLocaleString('cs-CZ',{maximumFractionDigits:1});
-  $('#question').innerHTML=`<section class="result"><div class="result-top"><div><span class="eyebrow">Test číslo 2 · Výsledek</span><h1>${TIMSS.grade(sum)}</h1></div><div><div class="result-numbers"><div class="result-score"><strong>${sum} / 12</strong><span>získaných bodů</span></div><div class="result-success"><strong>${percent} %</strong><span>úspěšnost</span></div></div><p class="subtle result-time">Čas ${formatTime(elapsed)}</p></div></div><p class="results-hint">Klikni na úlohu a prohlédni si svou odpověď.</p><p class="subtle">Za každou celou správně vyřešenou úlohu získáš jeden bod. U úloh s více částmi uvidíš i správnost jednotlivých odpovědí.</p><div class="result-grid">${TIMSS.ids.map((id,i)=>{const s=status(i);return `<button class="result-item" data-review="${i}" aria-label="Úloha ${i+1}, ${hasAnyAnswer(i)?statusLabel(s):'bez odpovědi'}, ${scores[i]} z 1 bodu. Prohlédnout odpověď."><span class="result-question"><span class="result-index">${i+1}</span><span>Úloha ${i+1}</span></span><span class="result-detail"><span class="status ${s}">${s==='correct'?'✓':s==='partial'?'◐':'×'} ${hasAnyAnswer(i)?statusLabel(s):'Bez odpovědi'}</span></span><span class="item-points">${scores[i]}/1</span></button>`;}).join('')}</div><div class="row result-actions"><button id="print" class="primary">Vytisknout certifikát</button><button id="print-answers" class="primary">Vytiskni své odpovědi</button><button id="home" class="secondary">Zpět na úvodní stránku</button><button id="again" class="secondary">Nový pokus</button></div></section>`;
+  $('#question').innerHTML=`<section class="result"><div class="result-top"><div><span class="eyebrow">Test číslo 2 · Výsledek</span><h1>${TIMSS.grade(sum)}</h1></div><div><div class="result-numbers"><div class="score-points"><strong>${sum} / 12</strong><span>získaných bodů</span></div><div class="score-percent"><strong>${percent} %</strong><span>úspěšnost</span></div></div><p class="subtle result-time">Čas ${formatTime(elapsed)}</p></div></div><p class="results-hint">Klikni na úlohu a prohlédni si svou odpověď.</p><p class="subtle">Za každou celou správně vyřešenou úlohu získáš jeden bod. U úloh s více částmi uvidíš i správnost jednotlivých odpovědí.</p><div class="result-grid">${TIMSS.ids.map((id,i)=>{const s=status(i);return `<button class="result-item" data-review="${i}" aria-label="Úloha ${i+1}, ${hasAnyAnswer(i)?statusLabel(s):'bez odpovědi'}, ${scores[i]} z 1 bodu. Prohlédnout odpověď."><span class="result-question"><span class="result-index">${i+1}</span><span>Úloha ${i+1}</span></span><span class="result-detail"><span class="status ${s}">${s==='correct'?'✓':s==='partial'?'◐':'×'} ${hasAnyAnswer(i)?statusLabel(s):'Bez odpovědi'}</span></span><span class="item-points">${scores[i]}/1</span></button>`;}).join('')}</div><div class="row result-actions"><button id="print" class="primary">Vytisknout certifikát</button><button id="print-answers" class="primary">Vytiskni své odpovědi</button><button id="home" class="secondary">Zpět na úvodní stránku</button><button id="again" class="secondary">Nový pokus</button></div></section>`;
   $('#prev').disabled=true;$('#next').disabled=true;$('#pad-toggle').disabled=true;$('#finish').textContent='Výsledek testu';
   $('#question').querySelectorAll('[data-review]').forEach(b=>b.onclick=()=>go(Number(b.dataset.review)));
   prepareCertificate();
   $('#print').onclick=()=>{prepareCertificate();document.body.classList.add('certificate-preview');$('#certificate-tools').hidden=false;window.scrollTo(0,0);$('#certificate-back').focus();};
   $('#print-answers').onclick=showPortfolio;
-  $('#home').onclick=()=>{$('#leave-confirm').showModal();$('#leave-cancel').focus();};
-  $('#again').onclick=()=>{if(window.confirm('Začít nový pokus? Tento výsledek se vymaže.'))location.reload();};
+  $('#home').onclick=()=>openExitDialog('home');
+  $('#again').onclick=()=>openExitDialog('again');
   $('#question').focus();
 }
-$('#leave-cancel').onclick=()=>{$('#leave-confirm').close();$('#home').focus();};
-$('#leave-accept').onclick=()=>location.assign('index.html');
 setInterval(()=>{if(!finished)$('#timer').textContent=formatTime(Math.floor((Date.now()-started)/1000));},1000);
 render(false);

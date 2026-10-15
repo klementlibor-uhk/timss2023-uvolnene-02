@@ -1,26 +1,39 @@
 'use strict';
-window.CzechTypography=(()=>{
-  const oneLetter=/(?<![^\s(„“«])([ksvzouai])[ \t]+(?=\S)/gi;
-  const ending=/(?<![^\s(„“«])[ksvzouai]$/i;
-  const excluded='script,style,textarea,input,pre,code,svg,[contenteditable],.cert-name';
-  const text=value=>value.replace(oneLetter,'$1\u00a0');
-  function blockOwner(node){let el=node.parentElement;while(el&&getComputedStyle(el).display==='inline')el=el.parentElement;return el;}
-  function apply(root=document.body) {
-    if(!root)return;
-    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let node,previous=null;
-    while((node=walker.nextNode())) {
-      if(!node.parentElement||node.parentElement.closest(excluded)){previous=null;continue;}
-      let value=text(node.nodeValue);
-      if(previous&&ending.test(previous.nodeValue)&&/^[ \t]+\S/u.test(value)&&blockOwner(previous)===blockOwner(node))value=value.replace(/^[ \t]+/u,'\u00a0');
-      if(value!==node.nodeValue)node.nodeValue=value;
-      if(value.length)previous=node;
+// Keep Czech one-letter words with the following word, including across inline tags.
+// Change text nodes only: answers, markup, input values and event handlers stay intact.
+window.CzechTypography = (() => {
+  const letters = 'ksvzouaiKSVZOUAI';
+  const inside = new RegExp(`(?<![^\\s(„“«])([${letters}])[ \\t]+(?=\\S|$)`, 'gu');
+  const ending = new RegExp(`(?<![^\\s(„“«])[${letters}]$`, 'u');
+  const excluded = 'script,style,textarea,input,pre,code,svg,[contenteditable],.cert-name';
+  const text = value => value.replace(/;[ \t]*/gu, ', ').replace(inside, '$1\u00a0').replace(/(?<=\d)[ \t]+(?=\d{3}(?:\D|$))/gu, '\u00a0').replace(/(\d)[ \t]+(?=cm\b)/gu, '$1\u00a0');
+  function blockOwner(node) {
+    let el = node.parentElement;
+    while (el && getComputedStyle(el).display === 'inline') el = el.parentElement;
+    return el;
+  }
+  function apply(root = document.body) {
+    if (!root) return;
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    let node, previous = null;
+    while ((node = walker.nextNode())) {
+      if (!node.parentElement || node.parentElement.closest(excluded)) {previous = null; continue;}
+      let value = text(node.nodeValue);
+      if (previous && ending.test(previous.nodeValue) && /^[ \t]+\S/u.test(value)
+          && blockOwner(previous) === blockOwner(node)) {
+        value = value.replace(/^[ \t]+/u, '\u00a0');
+      }
+      if (value !== node.nodeValue) node.nodeValue = value;
+      if (value.length) previous = node;
     }
   }
   apply();
-  const observer=new MutationObserver(records=>{
-    const roots=new Set(records.map(record=>record.target.nodeType===3?record.target.parentElement:record.target));
-    roots.forEach(root=>apply(root));
+  const observer = new MutationObserver(records => {
+    const roots = new Set(records.map(record => record.target.nodeType === 3
+      ? record.target.parentElement : record.target));
+    roots.forEach(root => apply(root));
   });
-  observer.observe(document.body,{childList:true,characterData:true,subtree:true});
-  return {apply,text};
+  observer.observe(document.body, {childList:true, characterData:true, subtree:true});
+  return {apply, text};
 })();
+
