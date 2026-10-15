@@ -15,7 +15,7 @@ function preparePortfolio() {
   for(let i=0;i<TIMSS.ids.length;i++){
     const article=document.createElement('article');article.className='portfolio-task';
     const s=status(i),label=hasAnyAnswer(i)?statusLabel(s):'Bez odpovědi';
-    article.innerHTML=`<div class="portfolio-task-head"><h2>Úloha ${i+1} · ${titles[i]}</h2><span class="status ${s}">${label} · ${scores[i]}/1 bod</span></div><div class="portfolio-question">${screens[i]()}</div>`;
+    article.innerHTML=`<div class="portfolio-task-head"><h2>Úloha ${i+1}</h2><span class="status ${s}">${label} · ${scores[i]}/1 bod</span></div><div class="portfolio-question">${screens[i]()}</div>`;
     for(const [j,key] of (numeric[i]||[]).entries()){
       const input=article.querySelector(`[data-model="${key}"]`);
       portfolioMark(input.closest('.answer-wrap'),parts[i][j],String(answers[key]??'').trim()!=='');
@@ -84,4 +84,4 @@ $('#portfolio-print').onclick=async()=>{
   await Promise.all([...$('#portfolio').querySelectorAll('img')].map(async img=>{try{await img.decode();}catch{}}));
   window.print();
 };
-window.addEventListener('beforeprint',()=>{if(document.body.classList.contains('portfolio-preview'))preparePortfolio();});
+window.addEventListener('beforeprint',()=>{if(document.body.classList.contains('portfolio-preview')&&!$('#portfolio').hasChildNodes())preparePortfolio();});
