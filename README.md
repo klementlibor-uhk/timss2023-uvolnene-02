@@ -1,4 +1,4 @@
-# Matematický test číslo 2 – verze 4
+# Matematický test číslo 2 – verze 5
 
 Samostatná verze testu 2. Společný vzhled, devět kroků tréninku a obecné ovládání vycházejí z dokončeného testu 1 ve verzi 14. Průvodkyní je želvička. Zvířecí šnek mezi odpověďmi v tréninku zůstává součástí zadání.
 
@@ -29,3 +29,7 @@ Zdroj IEA’s Trends in International Mathematics and Science Study – TIMSS 20
 V testových úlohách 3 a 8 se nezobrazují opakované technické pokyny, trénink je zachovává. Úloha 10 má dvě nabídky „Vyber jednu možnost“ bez viditelných popisků prvního a druhého jména. Počet a jednotka cm zůstávají v textech pohromadě.
 
 Vysvětlení zdůrazňují dělitelnost sudého čísla dvěma, zápis postupu u tašek a vztah vzdálenosti k počtu kroků. Fotbalové míče ve vysvětlení jsou výřezy stejného původního obrázku použitého v zadání, vložené pomocí SVG. Úloha 10 má nové vysvětlení s porovnáním 2. a 3. kola pro všechny hráče. U rovnoběžek, sněhového diagramu a barevných zvířátek jsou zapracována domluvená upřesnění a zvýraznění. Správné odpovědi a bodování se nemění.
+
+## Úpravy verze 5
+
+Záhlaví každé úlohy má stejně jako v testu 1 jediný menší modrý řádek „Úloha 1 z 12“ až „Úloha 12 z 12“. Velký doplňkový nadpis a samostatné počítadlo jsou odstraněné. Dialog o soukromí obsahuje schválený srozumitelnější text s tučným úvodním odstavcem a bez genderově vyhraněných výrazů. Úlohy, odpovědi, trénink a bodování zůstávají beze změny.

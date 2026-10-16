@@ -36,7 +36,7 @@ function render(focus=true) {
   document.body.classList.remove('results-view');
   renderSteps();
   const s=finished?status(page):null;
-  $('#question').innerHTML=`<div class="question-header"><h1 class="task-heading">Úloha ${page+1}</h1><span class="qid">${TIMSS.ids[page]}</span></div><p class="task-position subtle">${page+1} z 12${finished?' · Prohlížení odpovědí':''}</p>${finished?`<p class="review-summary status ${s}">${s==='correct'?'✓':s==='partial'?'◐':'×'} ${hasAnyAnswer(page)?statusLabel(s):'Bez odpovědi'} · ${TIMSS.score(answers)[page]}/1 bod</p>`:''}${screens[page]()}${finished?`<div class="review-answer"><b>Správná odpověď</b><p>${solutions[page]}</p></div>${lessonButton(page)}`:''}`;
+  $('#question').innerHTML=`<div class="question-header"><span class="eyebrow" role="heading" aria-level="1">Úloha ${page+1} z 12${finished?' · Prohlížení odpovědí':''}</span><span class="qid">${TIMSS.ids[page]}</span></div>${finished?`<p class="review-summary status ${s}">${s==='correct'?'✓':s==='partial'?'◐':'×'} ${hasAnyAnswer(page)?statusLabel(s):'Bez odpovědi'} · ${TIMSS.score(answers)[page]}/1 bod</p>`:''}${screens[page]()}${finished?`<div class="review-answer"><b>Správná odpověď</b><p>${solutions[page]}</p></div>${lessonButton(page)}`:''}`;
   $('#prev').disabled=page===0;$('#next').hidden=false;$('#next').disabled=page===11;
   $('#finish').textContent=finished?'Zpět na výsledek':'Odevzdat test';
   $('#pad-toggle').disabled=finished||![1,5,11].includes(page);

@@ -1,7 +1,4 @@
 /* Adaptation for test 2. Shared tutorial and interface come from test 1 v14. */
-.test-page .task-heading{font-size:28px;margin:0}
-.test-page .question-header{margin-bottom:4px}
-.test-page .task-position{margin:0 0 24px}
 .intro-friend img{object-fit:contain}
 .turtle-help img{object-fit:contain}
 .portfolio .portfolio-name b{font-size:inherit}
