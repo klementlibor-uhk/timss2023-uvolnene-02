@@ -1,4 +1,4 @@
-# Matematický test číslo 2 – verze 6
+# Matematický test číslo 2 – verze 7
 
 Samostatná verze testu 2. Společný vzhled, devět kroků tréninku a obecné ovládání vycházejí z dokončeného testu 1 ve verzi 14. Průvodkyní je želvička. Zvířecí šnek mezi odpověďmi v tréninku zůstává součástí zadání.
 
@@ -39,3 +39,9 @@ Záhlaví každé úlohy má stejně jako v testu 1 jediný menší modrý řád
 - Běžná číselná pole v tréninku i testu přijímají desetinnou čárku i tečku, například 1,25. Písmena a více desetinných oddělovačů zůstávají zakázané.
 - Oprava platí pro klávesnici počítače, vložení ze schránky i číselnou klávesnici na stránce. Čitatel a jmenovatel zlomku zůstávají celočíselné.
 - Přepnutí do prázdného editoru zlomku a zpět zachová původní desetinné číslo. Bodování ani správné odpovědi se nemění.
+
+## Úpravy verze 7
+
+- Ve všech úlohách tréninku a hlavního testu jsou skryté malé výběrové kroužky a zaškrtávací čtverečky. Volba se označuje modrým zvýrazněním celého políčka. Písmena A–D zůstávají.
+- Společné styly choice-cards.css pokrývají běžné odpovědi, tabulku vlastností i obrázkové kartičky zvířat. Ovládání klávesnicí má viditelné zvýraznění celého políčka.
+- Zachovaný je výběr jedné odpovědi, nezávislé označování více odpovědí, automatické vyhodnocení i podpora desetinných čísel z verze 6.
