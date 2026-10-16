@@ -7,7 +7,7 @@ $('#keys').querySelectorAll('button').forEach(b=>{b.onpointerdown=e=>e.preventDe
 function keyPress(key){if(key==='ok'){closePad();return;}if(!activeInput||!document.contains(activeInput))return;const input=activeInput,m=state.numbers[input.dataset.model];
 if(key==='clear'){Object.assign(m,{mode:'plain',value:'',num:'',den:''});rebuildNumber(input);return;}
 if(key==='fraction'){
- if(m.mode==='fraction'){m.value=m.num;m.mode='plain';m.num='';m.den='';}
+ if(m.mode==='fraction'){m.value=!m.num&&!m.den?m.value:m.num;m.mode='plain';m.num='';m.den='';}
  else{m.num=/^-?\d+$/.test(m.value)?m.value:'';m.den='';m.mode='fraction';}
  rebuildNumber(input);return;
 }
@@ -15,7 +15,7 @@ if(key==='back'&&m.mode==='fraction'&&!m.num&&!m.den){m.mode='plain';m.value='';
 const start=input.selectionStart??input.value.length,end=input.selectionEnd??start;let value=input.value,pos=start;
 if(key==='back'){if(start!==end){value=value.slice(0,start)+value.slice(end);}else if(start>0){value=value.slice(0,start-1)+value.slice(end);pos--;} }
 else if(key==='minus'){if(input.dataset.part==='den')return;value=value.startsWith('-')?value.slice(1):'-'+value;pos=value.length;}
-else{const ch=key==='comma'?',':key;if(ch===','&&(m.mode==='fraction'||/[,.]/.test(value)))return;if(value.length>=input.maxLength&&start===end)return;value=value.slice(0,start)+ch+value.slice(end);pos=start+ch.length;}
+else{const ch=key==='comma'?',':key;if(ch===','&&m.mode==='fraction')return;if(value.length>=input.maxLength&&start===end)return;value=value.slice(0,start)+ch+value.slice(end);pos=start+ch.length;}
 if(!NumericInputs.allowed(input,value))return;input.value=value;input.setSelectionRange(Math.max(0,pos),Math.max(0,pos));NumericInputs.remember(input);m[input.dataset.part]=value;if(m.mode==='fraction'&&!m.num&&!m.den){m.mode='plain';m.value='';rebuildNumber(input);}else clearFeedback();}
 
 function clampFloating(el){if(el.hidden)return;const r=el.getBoundingClientRect();el.style.left=Math.max(5,Math.min(r.left,innerWidth-r.width-5))+'px';el.style.top=Math.max(5,Math.min(r.top,innerHeight-r.height-5))+'px';el.style.right='auto';}

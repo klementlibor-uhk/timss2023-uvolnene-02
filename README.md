@@ -1,4 +1,4 @@
-# Matematický test číslo 2 – verze 5
+# Matematický test číslo 2 – verze 6
 
 Samostatná verze testu 2. Společný vzhled, devět kroků tréninku a obecné ovládání vycházejí z dokončeného testu 1 ve verzi 14. Průvodkyní je želvička. Zvířecí šnek mezi odpověďmi v tréninku zůstává součástí zadání.
 
@@ -33,3 +33,9 @@ Vysvětlení zdůrazňují dělitelnost sudého čísla dvěma, zápis postupu u
 ## Úpravy verze 5
 
 Záhlaví každé úlohy má stejně jako v testu 1 jediný menší modrý řádek „Úloha 1 z 12“ až „Úloha 12 z 12“. Velký doplňkový nadpis a samostatné počítadlo jsou odstraněné. Dialog o soukromí obsahuje schválený srozumitelnější text s tučným úvodním odstavcem a bez genderově vyhraněných výrazů. Úlohy, odpovědi, trénink a bodování zůstávají beze změny.
+
+## Úpravy verze 6
+
+- Běžná číselná pole v tréninku i testu přijímají desetinnou čárku i tečku, například 1,25. Písmena a více desetinných oddělovačů zůstávají zakázané.
+- Oprava platí pro klávesnici počítače, vložení ze schránky i číselnou klávesnici na stránce. Čitatel a jmenovatel zlomku zůstávají celočíselné.
+- Přepnutí do prázdného editoru zlomku a zpět zachová původní desetinné číslo. Bodování ani správné odpovědi se nemění.
