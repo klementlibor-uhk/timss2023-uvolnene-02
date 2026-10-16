@@ -1,8 +1,8 @@
 'use strict';
 window.NumericInputs=(()=>{
-  const allowed=(input,value)=>input.dataset.integer==='true'||input.dataset.part==='den'
+  const allowed=(input,value)=>input.dataset.integer==='true'||['num','den'].includes(input.dataset.part)
     ? /^\d*$/.test(value)
-    : input.dataset.part==='num' ? /^-?\d*$/.test(value) : /^[-\d\s.,/]*$/.test(value);
+    : /^\d*(?:[,.]\d*)?$/.test(value);
   const remember=input=>{if(allowed(input,input.value))input.dataset.numericValue=input.value;};
   function bind(input){
     if(input.dataset.numericBound)return;
